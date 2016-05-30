@@ -1,0 +1,487 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ee="http://schemas.microsoft.com/expression/2010/effects" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" mc:Ignorable="d" x:Name="window" x:Class="reporteDeHallazgos.MainWindow"
+        Title="MainWindow" Loaded="ventanaPrincipalCargada">
+    <Window.Resources>
+        <Style x:Key="textStylePMM" TargetType="{x:Type TextBlock}">
+            <Setter Property="TextWrapping" Value="NoWrap"/>
+            <Setter Property="TextTrimming" Value="None"/>
+            <Setter Property="Foreground">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black" Offset="0"/>
+                        <GradientStop Color="#FF4630D6" Offset="0.289"/>
+                        <GradientStop Color="Black" Offset="1"/>
+                        <GradientStop Color="#FF452FD4" Offset="0.75"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="FontStretch" Value="Normal"/>
+            <Setter Property="FontFamily" Value="/reporteDeHallazgos;component/Fonts/#Segoe UI"/>
+        </Style>
+        <Style x:Key="ButtonFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle StrokeDashArray="1 2" StrokeThickness="1" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" Margin="2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <LinearGradientBrush x:Key="ButtonNormalBackground" EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#F3F3F3" Offset="0"/>
+            <GradientStop Color="#EBEBEB" Offset="0.5"/>
+            <GradientStop Color="#DDDDDD" Offset="0.5"/>
+            <GradientStop Color="#CDCDCD" Offset="1"/>
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="ButtonNormalBorder" Color="#FF707070"/>
+        <Style x:Key="botonContinuar" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Rectangle x:Name="rectangle" Fill="#FFB9B9F5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" StrokeThickness="1" Stroke="Black" RadiusX="10" RadiusY="10"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocused" Value="true"/>
+                            <Trigger Property="ToggleButton.IsChecked" Value="true"/>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#ADADAD"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Fill" TargetName="rectangle" Value="#FF8E8EF1"/>
+                                <Setter Property="StrokeThickness" TargetName="rectangle" Value="1.5"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Fill" TargetName="rectangle" Value="#FF5DF18C"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="0,1.5,0,-1.5" x:Name="LayoutRoot">
+        <VisualStateManager.CustomVisualStateManager>
+            <ei:ExtendedVisualStateManager/>
+        </VisualStateManager.CustomVisualStateManager>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="estadosCapturaDeDatosGenerales">
+                <VisualStateGroup.Transitions>
+                    <VisualTransition GeneratedDuration="0:0:0.5">
+                        <ei:ExtendedVisualStateManager.TransitionEffect>
+                            <ee:SmoothSwirlGridTransitionEffect/>
+                        </ei:ExtendedVisualStateManager.TransitionEffect>
+                    </VisualTransition>
+                </VisualStateGroup.Transitions>
+                <VisualState x:Name="estadoCapturaDeDatosCargado">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="grid">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="grid1">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="grid2">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="grid3">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="gridCapturaDeDatos">
+                            <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                        </DoubleAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="tabItemDatosGenerales">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                        </BooleanAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="estadoCapturaDeCantidadesCargado">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="gridCapturaDeDatos">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="grid1">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="grid2">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="grid3">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid">
+                            <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="estadoDatosDePersonalCargado">
+                    <Storyboard>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid2">
+                            <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                        </DoubleAnimationUsingKeyFrames>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid3">
+                            <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="estadoDatosDeProductoCargado">
+                    <Storyboard>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid1">
+                            <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                        </DoubleAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="grid1">
+                            <EasingColorKeyFrame KeyTime="0" Value="#FFFDEEEE"/>
+                        </ColorAnimationUsingKeyFrames>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid3">
+                            <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="estadoDetallesCargado">
+                    <Storyboard>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid2">
+                            <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                        </DoubleAnimationUsingKeyFrames>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid1">
+                            <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TabControl x:Name="tabControlPrincipal" Grid.ColumnSpan="13" Grid.RowSpan="12" Style="{DynamicResource SimpleTabControl}">
+            <TabItem x:Name="tabItemDatosGenerales" Header="Captura de datos generales" Style="{DynamicResource SimpleTabItem}" IsEnabled="False">
+                <Grid x:Name="gridCapturaDeDatos" Background="#FFE5E5E5" Loaded="capturaDatosGeneralesLoaded" Opacity="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Margin="0,0,0,0" TextWrapping="Wrap" Grid.ColumnSpan="6" Grid.Row="1" Style="{DynamicResource textStylePMM}" FontSize="20" ><Run Language="es-mx" Text="Fecha:"/></TextBlock>
+                    <TextBlock Margin="0,0,0,0" TextWrapping="Wrap" Grid.ColumnSpan="6" Grid.Row="2" FontSize="20" Style="{DynamicResource textStylePMM}" ><Run Language="es-mx" Text="Turno:"/></TextBlock>
+                    <TextBlock Margin="0,0,0,0" TextWrapping="Wrap" Grid.ColumnSpan="6" Grid.Row="3" FontSize="20" Style="{DynamicResource textStylePMM}"><Run Language="es-mx" Text="Responsable:"/></TextBlock>
+                    <TextBlock Margin="0,0,0,0" TextWrapping="Wrap" Grid.ColumnSpan="6" Grid.Row="4" FontSize="20" Style="{DynamicResource textStylePMM}"><Run Language="es-mx" Text="Pedido:"/></TextBlock>
+                    <TextBlock Margin="0,0,0,0" TextWrapping="Wrap" Grid.ColumnSpan="6" Grid.Row="5" FontSize="20" Style="{DynamicResource textStylePMM}"><Run Language="es-mx" Text="Cantidad de Lotes:"/></TextBlock>
+                    <TextBlock Margin="0,0,0,0" TextWrapping="Wrap" Grid.ColumnSpan="6" Grid.Row="6" FontSize="20" Style="{DynamicResource textStylePMM}"><Run Language="es-mx" Text="Prefijo de Lote:"/></TextBlock>
+                    <DatePicker x:Name="dateTimePickerFecha" Grid.ColumnSpan="5" Grid.Column="6" Grid.Row="1" BorderThickness="2" VerticalContentAlignment="Stretch" IsTodayHighlighted="True" FontSize="20" HorizontalContentAlignment="Stretch"/>
+                    <ComboBox IsEditable="False" Grid.ColumnSpan="5" Grid.Column="6" Margin="0" Grid.Row="2" Grid.RowSpan="1" Padding="0,2,0,0" FontSize="20" VerticalContentAlignment="Center">
+                        <ComboBoxItem Content="PrimerElemento"/>
+                        <ComboBoxItem Content="Segundo elemento"/>
+                        <ComboBoxItem Content="Tercer elemento"/>
+                        <ComboBoxItem Content="Cuarto elemento"/>
+                    </ComboBox>
+                    <ComboBox Grid.ColumnSpan="5" Grid.Column="6" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" FontSize="20" VerticalContentAlignment="Center">
+                        <ComboBoxItem Content="Primer responsable"/>
+                        <ComboBoxItem Content="Segundo responsable"/>
+                        <ComboBoxItem Content="Tercer responsable"/>
+                    </ComboBox>
+                    <TextBox Grid.ColumnSpan="5" Grid.Column="6" Margin="0" Grid.Row="4" TextWrapping="Wrap" Text="" VerticalContentAlignment="Center" FontSize="20"/>
+                    <TextBox Grid.ColumnSpan="5" Grid.Column="6" Margin="0" Grid.Row="5" TextWrapping="Wrap" Text="" VerticalContentAlignment="Center" FontSize="20"/>
+                    <TextBox Grid.ColumnSpan="5" Grid.Column="6" Margin="0" Grid.Row="6" TextWrapping="Wrap" Text="" VerticalContentAlignment="Center" FontSize="20"/>
+                    <Button Grid.ColumnSpan="3" Content="Continuar" Grid.Column="8" HorizontalAlignment="Stretch" Grid.Row="9" VerticalAlignment="Stretch" Style="{DynamicResource botonContinuar}" FontSize="20" Click="botonContinuar_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="tabItemCantidades" Header="Cantidades" Style="{DynamicResource SimpleTabItem}" Height="21.96" VerticalAlignment="Top" IsEnabled="False">
+                <Grid x:Name="grid" Background="#FFE5E5E5" Loaded="capturaDeCantidadesCargado" Opacity="0" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" Grid.ColumnSpan="6" Grid.RowSpan="1" Grid.Row="1" Style="{DynamicResource textStylePMM}"><Run Language="es-mx" Text="Cantidad Inicial: "/></TextBlock>
+                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" Grid.ColumnSpan="6" Grid.RowSpan="1" Grid.Row="4" Style="{DynamicResource textStylePMM}"><Run Language="es-mx" Text="Cantidad Final: "/></TextBlock>
+                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" Grid.ColumnSpan="6" Grid.RowSpan="1" Grid.Row="7" Style="{DynamicResource textStylePMM}"><Run Language="es-mx" Text="Disposición: "/></TextBlock>
+                    <TextBox Grid.ColumnSpan="5" Grid.Column="6" HorizontalAlignment="Stretch" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" FontSize="16" />
+                    <TextBox Grid.ColumnSpan="5" Grid.Column="6" HorizontalAlignment="Stretch" Grid.Row="4" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" FontSize="16" />
+                    <TextBox Grid.ColumnSpan="5" Grid.Column="6" HorizontalAlignment="Stretch" Grid.Row="7" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" FontSize="16" />
+                    <Button Grid.ColumnSpan="3" Content="Continuar" Grid.Column="8" HorizontalAlignment="Stretch" Grid.Row="9" VerticalAlignment="Stretch"  Style="{DynamicResource botonContinuar}" FontSize="20" Click="botonContinuar_Click"/>
+                    <Button Grid.ColumnSpan="3" Content="Regresar" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="9" VerticalAlignment="Stretch" Style="{DynamicResource botonContinuar}" FontSize="20" Click="botonRegresar_click" />
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="tabItemDatosDePersonal" Header="Datos de personal" Style="{DynamicResource SimpleTabItem}" Height="21.96" VerticalAlignment="Top" IsEnabled="False">
+                <Grid x:Name="grid1" Background="#FFE5E5E5" Loaded="capturaDatosDePersonalLoaded" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" Grid.ColumnSpan="6" Grid.RowSpan="1" Grid.Row="1" Style="{DynamicResource textStylePMM}"><Run Language="es-mx" Text="Identificado por: "/></TextBlock>
+                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" Grid.ColumnSpan="6" Grid.RowSpan="1" Grid.Row="2" Style="{DynamicResource textStylePMM}"><Run Language="es-mx" Text="Supervisor en turno: "/></TextBlock>
+                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" Grid.ColumnSpan="6" Grid.RowSpan="1" Grid.Row="3" Style="{DynamicResource textStylePMM}"><Run Language="es-mx" Text="Inspector de calidad en turno: "/></TextBlock>
+                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" Grid.ColumnSpan="6" Grid.RowSpan="1" Grid.Row="4" Style="{DynamicResource textStylePMM}"><Run Language="es-mx" Text="Operador en turno:  "/></TextBlock>
+                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" Grid.ColumnSpan="6" Grid.RowSpan="1" Grid.Row="5" Style="{DynamicResource textStylePMM}"><Run Language="es-mx" Text="Ayudante en turno:  "/></TextBlock>
+                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" Grid.ColumnSpan="6" Grid.RowSpan="1" Grid.Row="6" Style="{DynamicResource textStylePMM}"><Run Language="es-mx" Text="Enterado: "/></TextBlock>
+                    <ComboBox IsEditable="False" Grid.ColumnSpan="5" Grid.Column="6" Margin="0" Grid.Row="1" Grid.RowSpan="1" Padding="0,2,0,0" FontSize="16" VerticalContentAlignment="Center">
+                        <ComboBoxItem Content="PrimerElemento"/>
+                    </ComboBox>
+                    <ComboBox IsEditable="False" Grid.ColumnSpan="5" Grid.Column="6" Margin="0" Grid.Row="2" Grid.RowSpan="1" Padding="0,2,0,0" FontSize="16" VerticalContentAlignment="Center">
+                        <ComboBoxItem Content="PrimerElemento"/>
+                    </ComboBox>
+                    <ComboBox IsEditable="False" Grid.ColumnSpan="5" Grid.Column="6" Margin="0" Grid.Row="3" Grid.RowSpan="1" Padding="0,2,0,0" FontSize="16" VerticalContentAlignment="Center">
+                        <ComboBoxItem Content="PrimerElemento"/>
+                    </ComboBox>
+                    <ComboBox IsEditable="False" Grid.ColumnSpan="5" Grid.Column="6" Margin="0" Grid.Row="4" Grid.RowSpan="1" Padding="0,2,0,0" FontSize="16" VerticalContentAlignment="Center">
+                        <ComboBoxItem Content="PrimerElemento"/>
+                    </ComboBox>
+                    <ComboBox IsEditable="False" Grid.ColumnSpan="5" Grid.Column="6" Margin="0" Grid.Row="5" Grid.RowSpan="1" Padding="0,2,0,0" FontSize="16" VerticalContentAlignment="Center">
+                        <ComboBoxItem Content="PrimerElemento"/>
+                    </ComboBox>
+                    <ComboBox IsEditable="False" Grid.ColumnSpan="5" Grid.Column="6" Margin="0" Grid.Row="6" Grid.RowSpan="1" Padding="0,2,0,0" FontSize="16" VerticalContentAlignment="Center">
+                        <ComboBoxItem Content="PrimerElemento"/>
+                    </ComboBox>
+                    <Button Grid.ColumnSpan="3" Content="Continuar" Grid.Column="8" HorizontalAlignment="Stretch" Grid.Row="9" VerticalAlignment="Top"  Style="{DynamicResource botonContinuar}" FontSize="20" Click="botonContinuar_Click" Height="39"/>
+                    <Button Grid.ColumnSpan="3" Content="Regresar" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="9" VerticalAlignment="Stretch" Style="{DynamicResource botonContinuar}" FontSize="20" Click="botonRegresar_click" />
+
+                </Grid>
+
+            </TabItem>
+            <TabItem x:Name="tabItemDatosDeProducto" Header="Datos de producto" Style="{DynamicResource SimpleTabItem}" Height="21.96" VerticalAlignment="Top" IsEnabled="False">
+                <Grid x:Name="grid2" Background="#FFE5E5E5" Loaded="capturaDatosDeProductoCargado" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" Grid.ColumnSpan="6" Grid.RowSpan="1" Grid.Row="0" Style="{DynamicResource textStylePMM}"><Run Language="es-mx" Text="Clave: "/></TextBlock>
+                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" Grid.ColumnSpan="6" Grid.RowSpan="1" Grid.Row="1" Style="{DynamicResource textStylePMM}"><Run Language="es-mx" Text="Cliente: "/></TextBlock>
+                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" Grid.ColumnSpan="6" Grid.RowSpan="1" Grid.Row="2" Style="{DynamicResource textStylePMM}"><Run Language="es-mx" Text="Color: "/></TextBlock>
+                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" Grid.ColumnSpan="6" Grid.RowSpan="1" Grid.Row="3" Style="{DynamicResource textStylePMM}"><Run Language="es-mx" Text="Calibre:  "/></TextBlock>
+                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" Grid.ColumnSpan="6" Grid.RowSpan="1" Grid.Row="4" Style="{DynamicResource textStylePMM}"><Run Language="es-mx" Text="Material:  "/></TextBlock>
+                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" Grid.ColumnSpan="6" Grid.RowSpan="1" Grid.Row="5" Style="{DynamicResource textStylePMM}"><Run Language="es-mx" Text="Enterado: "/></TextBlock>
+                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" Grid.ColumnSpan="6" Grid.RowSpan="1" Grid.Row="6" Style="{DynamicResource textStylePMM}"><Run Language="es-mx" Text="Perfil: "/></TextBlock>
+                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" Grid.ColumnSpan="6" Grid.RowSpan="1" Grid.Row="7" Style="{DynamicResource textStylePMM}"><Run Language="es-mx" Text="Corte: "/></TextBlock>
+                    <TextBox Grid.ColumnSpan="5" Grid.Column="6" HorizontalAlignment="Stretch" Grid.Row="0" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" FontSize="16" />
+                    <TextBox Grid.ColumnSpan="5" Grid.Column="6" HorizontalAlignment="Stretch" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" FontSize="16" />
+                    <TextBox Grid.ColumnSpan="5" Grid.Column="6" HorizontalAlignment="Stretch" Grid.Row="2" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" FontSize="16" />
+                    <TextBox Grid.ColumnSpan="5" Grid.Column="6" HorizontalAlignment="Stretch" Grid.Row="3" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" FontSize="16" />
+                    <TextBox Grid.ColumnSpan="5" Grid.Column="6" HorizontalAlignment="Stretch" Grid.Row="4" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" FontSize="16" />
+                    <TextBox Grid.ColumnSpan="5" Grid.Column="6" HorizontalAlignment="Stretch" Grid.Row="5" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" FontSize="16" />
+                    <TextBox Grid.ColumnSpan="5" Grid.Column="6" HorizontalAlignment="Stretch" Grid.Row="6" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" FontSize="16" />
+                    <TextBox Grid.ColumnSpan="5" Grid.Column="6" HorizontalAlignment="Stretch" Grid.Row="7" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" FontSize="16" />
+                    <Button Grid.ColumnSpan="10" Content="Buscar producto" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="8" VerticalAlignment="Stretch"  Style="{DynamicResource botonContinuar}" FontSize="20" Margin="0,11.468,0,28.035" Grid.RowSpan="2"/>
+                    <Button Grid.ColumnSpan="3" Content="Continuar" Grid.Column="8" HorizontalAlignment="Stretch" Grid.Row="10" VerticalAlignment="Stretch"  Style="{DynamicResource botonContinuar}" FontSize="20" Click="botonContinuar_Click"/>
+                    <Button Grid.ColumnSpan="3" Content="Regresar" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="10" VerticalAlignment="Stretch" Style="{DynamicResource botonContinuar}" FontSize="20" Click="botonRegresar_click" />
+
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="tabItemDetalles" Header="Detalles" Style="{DynamicResource SimpleTabItem}" Height="21.96" VerticalAlignment="Top" IsEnabled="False">
+                <TabItem.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                        <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                        <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                        <GradientStop Color="#FF998989" Offset="1"/>
+                    </LinearGradientBrush>
+                </TabItem.Background>
+                <Grid x:Name="grid3" Background="#FFE5E5E5" Loaded="datosDetallesCargado">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" Grid.ColumnSpan="12" Grid.RowSpan="1" Grid.Row="0" Style="{DynamicResource textStylePMM}" TextAlignment="Left"><Run Language="es-mx" Text="Descripción: "/></TextBlock>
+                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" Grid.ColumnSpan="12" Grid.RowSpan="1" Grid.Row="3" Style="{DynamicResource textStylePMM}" TextAlignment="Left"><Run Language="es-mx" Text="Inspecciones realizadas: "/></TextBlock>
+                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" Grid.ColumnSpan="12" Grid.RowSpan="1" Grid.Row="6" Style="{DynamicResource textStylePMM}" TextAlignment="Left"><Run Language="es-mx" Text="Probable causa: "/></TextBlock>
+                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" Grid.ColumnSpan="12" Grid.RowSpan="1" Grid.Row="9" Style="{DynamicResource textStylePMM}" TextAlignment="Left"><Run Language="es-mx" Text="Observaciones: "/></TextBlock>
+                    <RichTextBox Grid.ColumnSpan="12" HorizontalAlignment="Stretch" Grid.Row="1" Grid.RowSpan="2" VerticalAlignment="Stretch" TextOptions.TextHintingMode="Animated" AutoWordSelection="False" IsUndoEnabled="True" Block.LineHeight="8">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <RichTextBox Grid.ColumnSpan="12" HorizontalAlignment="Stretch" Grid.Row="4" Grid.RowSpan="2" VerticalAlignment="Stretch">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <RichTextBox Grid.ColumnSpan="12" HorizontalAlignment="Stretch" Grid.Row="7" Grid.RowSpan="2" VerticalAlignment="Stretch">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <RichTextBox Grid.ColumnSpan="12" HorizontalAlignment="Stretch" Grid.Row="10" Grid.RowSpan="2" VerticalAlignment="Stretch">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <Button Grid.ColumnSpan="3" Content="Continuar" Grid.Column="8" HorizontalAlignment="Stretch" Grid.Row="13" VerticalAlignment="Stretch"  Style="{DynamicResource botonContinuar}" FontSize="20" Grid.RowSpan="1" Click="botonContinuar_Click"/>
+                    <Button Grid.ColumnSpan="3" Content="Regresar" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="13" VerticalAlignment="Stretch" Style="{DynamicResource botonContinuar}" FontSize="20" Click="botonRegresar_click" />
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+
+</Window>

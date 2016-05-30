@@ -1,0 +1,17 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "reporteDeHallazgos", "reporteDeHallazgos\reporteDeHallazgos.csproj", "{52f226fb-b5c3-427d-9d9a-6a60899006c0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52F226FB-B5C3-427D-9D9A-6A60899006C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52F226FB-B5C3-427D-9D9A-6A60899006C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52F226FB-B5C3-427D-9D9A-6A60899006C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52F226FB-B5C3-427D-9D9A-6A60899006C0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
